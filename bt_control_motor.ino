@@ -21,48 +21,58 @@ void initMotors() {
 void btControlMotor(String cmd) {
   int speed; // Local variable
   int value = (cmd.substring(2,cmd.length())).toInt();
+  Serial.print("motor ");
+   Serial.print(value);
+   Serial.println();
   switch (value) {
     
       //______________Motor 1______________
       
-      case '1': // Motor 1 Forward
+      case 1: // Motors Forward
       analogWrite(speedPinA, 255);//Sets speed variable via PWM 
       digitalWrite(dir1PinA, LOW);
       digitalWrite(dir2PinA, HIGH);
-      Serial.println("Motor 1 Forward"); // Prints out “Motor 1 Forward” on the serial monitor
+      analogWrite(speedPinB, 255);
+      digitalWrite(dir1PinB, LOW);
+      digitalWrite(dir2PinB, HIGH);
+      Serial.println("Motors Forward"); // Prints out “Motor 1 Forward” on the serial monitor
       break;
       
-      case '2': // Motor 1 Stop (Freespin)
+      case 2: // Motors Reverse
       analogWrite(speedPinA, 0);
-      digitalWrite(dir1PinA, LOW);
-      digitalWrite(dir2PinA, HIGH);
-      Serial.println("Motor 1 Stop");
-      break;
-      
-      case '3': // Motor 1 Reverse
-      analogWrite(speedPinA, 255);
       digitalWrite(dir1PinA, HIGH);
       digitalWrite(dir2PinA, LOW);
-      Serial.println("Motor 1 Reverse");
+      digitalWrite(dir1PinB, HIGH);
+      digitalWrite(dir2PinB, LOW);
+      Serial.println("Motors Reverse");
+      break;
+      
+      case 3: // Motors Stop
+      analogWrite(speedPinA, 255);
+      digitalWrite(dir1PinA, LOW);
+      digitalWrite(dir2PinA, LOW);
+      digitalWrite(dir1PinB, LOW);
+      digitalWrite(dir2PinB, LOW);
+      Serial.println("Motors Stops");
       break;
       
       //______________Motor 2______________
       
-      case '4': // Motor 2 Forward
+      case 4: // Motor 2 Forward
       analogWrite(speedPinB, 255);
       digitalWrite(dir1PinB, LOW);
       digitalWrite(dir2PinB, HIGH);
       Serial.println("Motor 2 Forward");
       break;
       
-      case '5': // Motor 1 Stop (Freespin)
+      case 5: // Motor 1 Stop (Freespin)
       analogWrite(speedPinB, 0);
       digitalWrite(dir1PinB, LOW);
       digitalWrite(dir2PinB, HIGH);
       Serial.println("Motor 2 Stop");
       break;
       
-      case '6': // Motor 2 Reverse
+      case 6: // Motor 2 Reverse
       analogWrite(speedPinB, 255);
       digitalWrite(dir1PinB, HIGH);
       digitalWrite(dir2PinB, LOW);
