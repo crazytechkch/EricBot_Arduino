@@ -7,7 +7,7 @@
 
 Servo servo;
 dht11 dht;
-U8GLIB_SSD1306_128X64 u8g(U8G_I2C_OPT_NONE|U8G_I2C_OPT_DEV_0);
+
 
 long val = 0;
 float temp = 0;
@@ -17,6 +17,8 @@ long timerServo = 0;
 String string;
 SoftwareSerial btSerial(2,3);
 
+U8GLIB_SSD1306_128X64 u8g(U8G_I2C_OPT_NONE|U8G_I2C_OPT_DEV_0);
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -25,21 +27,9 @@ void setup() {
   // define motor,servo controller pins
   initMotors();
   initServo();
-  
-  if ( u8g.getMode() == U8G_MODE_R3G3B2 ) {
-    u8g.setColorIndex(255);     // white
-  }
-  else if ( u8g.getMode() == U8G_MODE_GRAY2BIT ) {
-    u8g.setColorIndex(3);         // max intensity
-   }
-  else if ( u8g.getMode() == U8G_MODE_BW ) {
-    u8g.setColorIndex(1);         // pixel on
-  }
-  else if ( u8g.getMode() == U8G_MODE_HICOLOR ) {
-    u8g.setHiColorByRGB(255,255,255);
-  }
+  initOled();
   //Song1(3);
-  delay(1000);
+  delay(3000);
 }
 
 void loop() {
@@ -54,16 +44,7 @@ void loop() {
     if(string.startsWith("0:"))btControlServo(string);
     else if(string.startsWith("1:"))btControlMotor(string);
    }
-   //btControlMotor();
    readTemp();
-}
-
-void draw(void) {
-  // graphic commands to redraw the complete screen should be placed here  
-  u8g.setFont(u8g_font_unifont);
-  //u8g.setFont(u8g_font_osb21);
-  u8g.drawStr( 0, 12,"Beginning of BB8");
-  u8g.drawStr( 0, 24,"Eric's Thermos");
 }
 
 void readTemp(){
@@ -87,7 +68,7 @@ void readTemp(){
     do {
       draw();
       String str = dht.humidity+"";
-      u8g.setPrintPos(0,40);
+      u8g.setPrintPos(0,64);
       u8g.print((long)temp);
       u8g.print("\260C/");
       u8g.print(dht.humidity);

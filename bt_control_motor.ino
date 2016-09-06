@@ -56,20 +56,22 @@ void btControlMotor(String cmd) {
       Serial.println("Motors Stops");
       break;
       
-      //______________Motor 2______________
-      
-      case 4: // Motor 2 Forward
+      case 4: // Simulate Left Turn
       analogWrite(speedPinB, 255);
+      digitalWrite(dir1PinA, LOW);
+      digitalWrite(dir2PinA, HIGH);
       digitalWrite(dir1PinB, LOW);
-      digitalWrite(dir2PinB, HIGH);
-      Serial.println("Motor 2 Forward");
+      digitalWrite(dir2PinB, LOW);
+      Serial.println("Simulate Left Turn");
       break;
       
-      case 5: // Motor 1 Stop (Freespin)
+      case 5: // Simulate Right Turn
       analogWrite(speedPinB, 0);
+      digitalWrite(dir1PinA, LOW);
+      digitalWrite(dir2PinA, LOW);
       digitalWrite(dir1PinB, LOW);
       digitalWrite(dir2PinB, HIGH);
-      Serial.println("Motor 2 Stop");
+      Serial.println("Simulate Right Turn");
       break;
       
       case 6: // Motor 2 Reverse
