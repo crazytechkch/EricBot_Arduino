@@ -14,5 +14,5 @@ void btControlServo(String cmd) {
      Serial.println();
      servo.write(value);
   }
-  delay(100);
+1478/
 }
