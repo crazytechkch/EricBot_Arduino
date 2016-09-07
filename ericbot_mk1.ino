@@ -43,6 +43,7 @@ void loop() {
     }
     if(string.startsWith("0:"))btControlServo(string);
     else if(string.startsWith("1:"))btControlMotor(string);
+    else if(string.startsWith("2:"))drawOledFromString(string);
    }
    readTemp();
 }
