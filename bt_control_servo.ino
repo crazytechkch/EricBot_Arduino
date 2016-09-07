@@ -14,5 +14,4 @@ void btControlServo(String cmd) {
      Serial.println();
      servo.write(value);
   }
-1478/
 }
