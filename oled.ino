@@ -199,7 +199,6 @@ void drawOledFromString(String cmd) {
       case 4: u8g.drawXBMP(40, 8, 48, 48, heart);
     }
   } while(u8g.nextPage());
-  delay(3000);
 }
   
 
